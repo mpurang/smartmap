@@ -2,7 +2,8 @@ require([
 	"esri/Map",
 	"esri/views/SceneView",
 	"esri/widgets/Search",
-], function(Map, SceneView, Search){
+	"esri/widgets/Track"
+], function(Map, SceneView, Search, Track){
 	
 // Code to create the map and view will go here
 var map = new Map({
@@ -24,6 +25,20 @@ var searchWidget = new Search({
 // Add the search widget to the top right corner of the view
 view.ui.add(searchWidget, {
     position: "top-right"
+});
+
+// Create an instance of the Track widget and add it to the view's UI
+var track = new Track({
+    view: view
+});
+
+view.ui.add(track, {
+    position: "top-left"
+});
+
+// The sample will start tracking your location once the view becomes ready
+view.when(function() {
+track.start();
 });
 
 });
